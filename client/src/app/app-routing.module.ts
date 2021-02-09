@@ -1,3 +1,4 @@
+import { MemberDetailedResolver } from './_resolvers/member_detailed.resolver';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
@@ -24,7 +25,11 @@ const routes: Routes = [
         component: MemberListComponent,
         canActivate: [AuthGuard],
       },
-      { path: 'members/:username', component: MemberDetailComponent },
+      {
+        path: 'members/:username',
+        component: MemberDetailComponent,
+        resolve: { member: MemberDetailedResolver },
+      },
       {
         path: 'member/edit',
         component: MemberEditComponent,
